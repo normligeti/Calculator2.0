@@ -22,6 +22,11 @@ namespace CalculatorLib
             }
         }
 
+        /// <summary>
+        /// Calculates and returns the end result of a postfix algebraic expression.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>The result in double format.</returns>
         public static double CalculatePostfixUsingTree(this List<string> inputPostfixExpression)
         {
             return inputPostfixExpression.BuildTree().EvaluateTree();
@@ -61,7 +66,6 @@ namespace CalculatorLib
             }
         }
 
-
         private static double Calculate(double operand1, string operation, double operand2)
         {
             switch (operation)
@@ -78,6 +82,5 @@ namespace CalculatorLib
                     return 0;
             }
         }
-
     }
 }

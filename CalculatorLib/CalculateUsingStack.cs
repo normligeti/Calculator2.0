@@ -16,6 +16,7 @@ namespace CalculatorLib
         public static double CalculatePostfixUsingStack(this List<string> inputPostfixExpression)
         {
             Stack<double> stack = new Stack<double>();
+
             foreach (string token in inputPostfixExpression)
             {
                 if (double.TryParse(token, out double i))

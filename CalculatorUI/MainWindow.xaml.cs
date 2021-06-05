@@ -22,7 +22,7 @@ namespace CalculatorUI
     public partial class MainWindow : Window
     {
         string inputExpression = "";
-        string result;
+        string result = "";
         bool commaClicked = false;
 
         public MainWindow()
@@ -37,37 +37,56 @@ namespace CalculatorUI
             if (int.TryParse(buttonContent, out int result))
             {
                 inputExpression += buttonContent;
-                totalInputTextBlock.Text = inputExpression;
             }
             else
             {
                 if (inputExpression == "" || inputExpression.Last() == ' ')
                 {
                     inputExpression += buttonContent + " ";
-                    totalInputTextBlock.Text = inputExpression;
                 }
                 else
                 {
                     inputExpression += " " + buttonContent + " ";
-                    totalInputTextBlock.Text = inputExpression;
                 }
-
                 commaClicked = false;
             }
+            totalInputTextBlock.Text = inputExpression;
         }
 
-        private void buttonResult1_Click(object sender, RoutedEventArgs e)
+        private void buttonResult_Click(object sender, RoutedEventArgs e)
         {
-            result = inputExpression.Trim().ManageInput(1);
-            totalInputTextBlock.Text = inputExpression + "=";
-            currentInputTextBlock.Text = result;
-        }
+            result = "";
 
-        private void buttonResult2_Click(object sender, RoutedEventArgs e)
-        {
-            result = inputExpression.Trim().ManageInput(2);
-            totalInputTextBlock.Text = inputExpression + "=";
-            currentInputTextBlock.Text = result;
+            try
+            {
+                // 1 stack, 2 tree, 3 infix tree
+                if (stackModeRadioButton.IsChecked == true)
+                {
+                    result = inputExpression.Trim().ManageInput(1);
+                }
+                else if (treeModeRadioButton.IsChecked == true)
+                {
+                    result = inputExpression.Trim().ManageInput(2);
+                }
+                else if (altTreeModeRadioButton.IsChecked == true)
+                {
+                    result = inputExpression.Trim().ManageInput(3);
+                }
+
+                totalInputTextBlock.Text = inputExpression + "=";
+                currentInputTextBlock.Text = "";
+                currentInputTextBlock.Text = result;
+            }
+            catch (NullReferenceException)
+            {
+                buttonClearAll_Click(this, null);
+                currentInputTextBlock.Text = "syntax error";
+            }
+            catch (InvalidOperationException)
+            {
+                buttonClearAll_Click(this, null);
+                currentInputTextBlock.Text = "syntax error";
+            }
         }
 
         private void buttonComma_Click(object sender, RoutedEventArgs e)
@@ -84,19 +103,23 @@ namespace CalculatorUI
         {
             totalInputTextBlock.Text = "";
             currentInputTextBlock.Text = "0";
-            result = "";
             inputExpression = "";
+            commaClicked = false;
         }
 
-        private void buttonClearCurrent_Click(object sender, RoutedEventArgs e)
+        private void buttonDel_Click(object sender, RoutedEventArgs e)
         {
-            currentInputTextBlock.Text = "0";
+            if (inputExpression.Length > 0)
+            {
+                inputExpression = inputExpression.Remove(inputExpression.Length - 1);
+                totalInputTextBlock.Text = inputExpression;
+            }
         }
 
-        private void buttonNegate_Click(object sender, RoutedEventArgs e)
+        private void buttonLastAnswer_Click(object sender, RoutedEventArgs e)
         {
-            
+            inputExpression = result;
+            totalInputTextBlock.Text = inputExpression;
         }
-        
     }
 }

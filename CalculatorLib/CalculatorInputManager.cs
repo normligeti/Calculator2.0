@@ -15,11 +15,14 @@ namespace CalculatorLib
             if (mode == 1)
             {
                 result = infixExpression.ConvertInfixToPostfix().CalculatePostfixUsingStack().ToString();
-
             }
             if (mode == 2)
             {
                 result = infixExpression.ConvertInfixToPostfix().CalculatePostfixUsingTree().ToString();
+            }
+            if (mode == 3)
+            {
+                result = infixExpression.CalculateInfixUsingTree().ToString();
             }
 
             return result;

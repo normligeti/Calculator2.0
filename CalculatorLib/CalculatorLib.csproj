@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="CalculateUsingStack.cs" />
     <Compile Include="CalculateUsingTree.cs" />
+    <Compile Include="CalculateUsingTreeFromInfix.cs" />
     <Compile Include="InputConverter.cs" />
     <Compile Include="CalculatorInputManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
