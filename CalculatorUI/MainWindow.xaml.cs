@@ -25,6 +25,13 @@ namespace CalculatorUI
         string result = "";
         bool commaClicked = false;
 
+        enum Mode
+        {
+            Stack = 1,
+            TreePostfix = 2,
+            TreeInfix = 3
+        }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -59,18 +66,17 @@ namespace CalculatorUI
 
             try
             {
-                // 1 stack, 2 tree, 3 infix tree
                 if (stackModeRadioButton.IsChecked == true)
                 {
-                    result = inputExpression.Trim().ManageInput(1);
+                    result = inputExpression.Trim().ManageInput((int)Mode.Stack);
                 }
                 else if (treeModeRadioButton.IsChecked == true)
                 {
-                    result = inputExpression.Trim().ManageInput(2);
+                    result = inputExpression.Trim().ManageInput((int)Mode.TreePostfix);
                 }
                 else if (altTreeModeRadioButton.IsChecked == true)
                 {
-                    result = inputExpression.Trim().ManageInput(3);
+                    result = inputExpression.Trim().ManageInput((int)Mode.TreeInfix);
                 }
 
                 totalInputTextBlock.Text = inputExpression + "=";
