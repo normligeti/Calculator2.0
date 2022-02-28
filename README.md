@@ -1,4 +1,4 @@
-# Calculator2.0
+# Calculator2.0 C#
 A GUI (wpf) calculator that takes an algebraic expression and returns a result.
 The calculator respects the order of operations, handles parentheses and supports floating-point and negative numbers.
 The UI code in MainWindow.cs builds the input as a string and passes it to CalculatorInputManager.cs in CalculatorLib library.
